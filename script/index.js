@@ -335,6 +335,9 @@ $(document).ready(function(){
 
                 $('.cal_inform_img').attr('src', src);
                 $('.cal_inform_img').attr('alt', alt);
+            }else{
+                $('.cal_inform_img').attr('src', 'img/section3/event/event_comming_soon.png');
+                $('.cal_inform_img').attr('alt', '다음 이벤트를 기대해주세요');
             }
         }
     }
