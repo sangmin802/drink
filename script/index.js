@@ -31,7 +31,7 @@ $(document).ready(function(){
         for(var i in event){
             event_date.push(event[i].date);
         }
-        fillCalender(event_date);
+        fillCalender(event_date, event);
         fill_event(5);
     })
     
@@ -140,7 +140,6 @@ $(document).ready(function(){
 
     // section3 달력
     var today = new Date();
-    var real_today = new Date();
 
     fillCalender(today);
 
@@ -153,25 +152,18 @@ $(document).ready(function(){
     
     $(document).on('click', '.date_width', function(){
         var event_index = $(this).parent().index();
+        console.log(event_index)
         fill_event(event_index);
     })    
 
     $(document).on('click', '.prev', function(){
         prevCalender();
-        if(today.getFullYear()!=real_today.getFullYear()||today.getMonth()!=real_today.getMonth()){
-            $('.cal_inform_img').attr('src', 'img/section3/event/event_comming_soon.png')
-        }else{
-            fill_event(5);
-        }
+        fill_event(5);
     })  
 
     $(document).on('click', '.next', function(){
         nextCalender();
-        if(today.getFullYear()!=real_today.getFullYear()||today.getMonth()!=real_today.getMonth()){
-            $('.cal_inform_img').attr('src', 'img/section3/event/event_comming_soon.png')
-        }else{
-            fill_event(5);
-        }
+        fill_event(5);
     })
 
     // 함수모음
@@ -268,6 +260,7 @@ $(document).ready(function(){
 
     // 달력 채우기
     function fillCalender(){
+        var real_today = new Date()
         var cal_html = '';
         var cal_txt = '';
         var cal_blank_txt = '';
@@ -295,14 +288,13 @@ $(document).ready(function(){
         for(var d=1; d<=last_date.getDate(); d++){
             cal_txt = '';
             var event_point = '';
-
             for(var e in event_date){
-                if(d==event_date[e]&&real_today.getMonth()+1==today.getMonth()+1&&real_today.getFullYear()==today.getFullYear()){
+                if(d==event_date[e]&&today.getMonth()+1==event[e].month&&today.getFullYear()==event[e].year){
                     event_point = '<div class="event_point"></div>'
                 }
             }
             
-            if(d==real_today.getDate()&&real_today.getMonth()+1==today.getMonth()+1&&real_today.getFullYear()==today.getFullYear()){
+            if(d==today.getDate()&&real_today.getMonth()+1==today.getMonth()+1&&real_today.getFullYear()==today.getFullYear()){
                 cal_txt = '<div class="cal_size"><span class="today_check date_width">'+d+'</span>'+event_point+'</div>'
             }else{
                 cal_txt = '<div class="cal_size"><span class="date_width">'+d+'</span>'+event_point+'</div>'
@@ -321,23 +313,19 @@ $(document).ready(function(){
     }
 
     // 행사있는날 표시되게 하기
-    function fill_event(event_index){
+    function fill_event(_event_index){
         for(var i in event){
-            if(event[i].date==event_index+1&&event[i].year==today.getFullYear()&&event[i].month==today.getMonth()+1){
+            if(event[i].date==_event_index+1&&event[i].year==today.getFullYear()&&event[i].month==today.getMonth()+1){
                 date = event[i].date;
                 src = event[i].src;
                 alt = event[i].alt;
-
                 $('.event_point').removeClass('event_point_focus');
                 $('.date_width').removeClass('font_white');
-                $('.date_width').eq(event_index).siblings('.event_point').addClass('event_point_focus');
-                $('.date_width').eq(event_index).addClass('font_white');
-
+                $('.date_width').eq(_event_index).siblings('.event_point').addClass('event_point_focus');
+                $('.date_width').eq(_event_index).addClass('font_white');
+                
                 $('.cal_inform_img').attr('src', src);
                 $('.cal_inform_img').attr('alt', alt);
-            }else{
-                $('.cal_inform_img').attr('src', 'img/section3/event/event_comming_soon.png');
-                $('.cal_inform_img').attr('alt', '다음이벤트를 기대해주세요~');
             }
         }
     }
