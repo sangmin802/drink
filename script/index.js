@@ -12,7 +12,7 @@ $(document).ready(function(){
     var event_date = [];
     
     $.ajax({
-        url : '../json/snsitems.json',
+        url : 'https://raw.githubusercontent.com/sangmin802/drink/master/json/snsitems.json',
         method : 'GET',
         dataType : 'Json',
     }).done(function(data){
@@ -22,7 +22,7 @@ $(document).ready(function(){
     })
 
     $.ajax({
-        url : '../json/event_date.json',
+        url : 'https://raw.githubusercontent.com/sangmin802/drink/master/json/event_date.json',
         method : 'GET',
         dataType : 'json'
     }).done(function(data){
