@@ -14,7 +14,7 @@ $(document).ready(function(){
     $.ajax({
         url : '../json/snsitems.json',
         method : 'GET',
-        dataType : 'json'
+        dataType : 'Json',
     }).done(function(data){
         pdt = data;
 
