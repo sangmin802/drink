@@ -13,8 +13,8 @@ $(document).ready(function(){
     
     $.ajax({
         url : 'https://raw.githubusercontent.com/sangmin802/drink/master/json/snsitems.json',
-        method : 'GET',
-        dataType : 'Json',
+        method : 'get',
+        dataType : 'json',
     }).done(function(data){
         pdt = data;
 
@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     $.ajax({
         url : 'https://raw.githubusercontent.com/sangmin802/drink/master/json/event_date.json',
-        method : 'GET',
+        method : 'get',
         dataType : 'json'
     }).done(function(data){
         event = data;
